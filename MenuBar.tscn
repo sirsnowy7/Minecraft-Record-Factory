@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://MenuBar.gd" type="Script" id=1]
+
+[node name="MenuPanel" type="Panel"]
+anchor_right = 0.9
+anchor_bottom = 0.05
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuBar" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="File" type="MenuButton" parent="MenuBar"]
+margin_right = 35.0
+margin_bottom = 24.0
+text = "File"
+switch_on_hover = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Edit" type="MenuButton" parent="MenuBar"]
+visible = false
+margin_left = 39.0
+margin_right = 75.0
+margin_bottom = 24.0
+text = "Edit"
+items = [ "Undo", null, 0, false, false, 0, 0, null, "", false, "Redo", null, 0, false, false, 1, 0, null, "", false ]
+switch_on_hover = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="About" type="Button" parent="MenuBar"]
+margin_left = 39.0
+margin_right = 89.0
+margin_bottom = 24.0
+text = "About"
+flat = true

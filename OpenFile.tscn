@@ -1,0 +1,17 @@
+[gd_scene format=2]
+
+[node name="OpenFile" type="FileDialog"]
+margin_left = 34.0
+margin_top = 48.0
+margin_right = 597.0
+margin_bottom = 449.0
+popup_exclusive = true
+window_title = "Open a File"
+resizable = true
+mode = 0
+access = 2
+current_dir = "/home/chris/Documents/Godot/Minecraft Record Factory"
+current_path = "/home/chris/Documents/Godot/Minecraft Record Factory/"
+__meta__ = {
+"_edit_use_anchors_": false
+}

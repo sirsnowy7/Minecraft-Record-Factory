@@ -1,0 +1,75 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://AboutWindow.gd" type="Script" id=2]
+
+[node name="AboutWindow" type="WindowDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 48.0
+margin_top = 58.0
+margin_right = -40.0
+margin_bottom = -51.0
+window_title = "About"
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 161.0
+margin_top = 51.0
+margin_right = 390.0
+margin_bottom = 319.0
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_right = 229.0
+margin_bottom = 14.0
+text = "Minecraft Record Factory"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_top = 18.0
+margin_right = 229.0
+margin_bottom = 49.0
+text = "Created by sirsnowy7
+"
+align = 1
+
+[node name="Label3" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_top = 53.0
+margin_right = 229.0
+margin_bottom = 101.0
+text = "Special thanks to the
+Stitch's Hideout discord community
+"
+align = 1
+
+[node name="Label4" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_top = 105.0
+margin_right = 229.0
+margin_bottom = 136.0
+text = "Made possible with Godot Engine
+"
+align = 1
+
+[node name="IconContainer" type="CenterContainer" parent="CenterContainer/VBoxContainer"]
+margin_top = 140.0
+margin_right = 229.0
+margin_bottom = 268.0
+
+[node name="Icon" type="TextureRect" parent="CenterContainer/VBoxContainer/IconContainer"]
+margin_left = 50.0
+margin_right = 178.0
+margin_bottom = 128.0
+texture = ExtResource( 1 )
