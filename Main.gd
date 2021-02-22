@@ -10,6 +10,8 @@ onready var metaPanel = $MetaPanel
 onready var aboutWindow = $AboutWindow
 
 func _ready():
+	# change window title
+	OS.set_window_title("New Project - Minecraft Record Factory")
 	# AboutWindow.gd
 	aboutButton.connect("pressed", aboutWindow, "_on_aboutButton_pressed")
 
