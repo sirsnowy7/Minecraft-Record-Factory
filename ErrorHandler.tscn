@@ -1,0 +1,17 @@
+[gd_scene format=2]
+
+[node name="ErrorHandler" type="AcceptDialog"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -122.0
+margin_top = -46.0
+margin_right = 122.0
+margin_bottom = 46.0
+window_title = "Error"
+dialog_text = "Error encountered. If you see this message, I failed to add an error message. Report this on GitHub."
+dialog_autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

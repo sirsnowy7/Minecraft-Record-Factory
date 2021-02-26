@@ -63,12 +63,14 @@ func _on_File_button_down():
 	add_child(fileDialog)
 	# make it a modal and set up an event for file getting selected
 	fileDialog.show_modal(true)
+	fileDialog.filters = PoolStringArray(["*.ogg ;  Ogg Vorbis audio files", "*.mp3 ;  Mp3 audio files"])
 	fileDialog.connect("file_selected", self, "_on_OpenFile_file_selected")
 
 func _on_OpenFile_file_selected(fileSelected):
 	# set the filePath var to file selected, as well as button text
 	filePath = fileSelected
 	fileButton.text = fileSelected
+	fileButton.hint_tooltip = fileSelected
 
 func _on_anyInp_change(delta):
 	# anytime input is changed update all member vars

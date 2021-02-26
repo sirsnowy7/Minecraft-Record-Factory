@@ -1,0 +1,17 @@
+[gd_scene format=2]
+
+[node name="DirDialog" type="FileDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 45.0
+margin_top = 45.0
+margin_right = -39.0
+margin_bottom = -24.0
+window_title = "Select Empty Directory"
+mode = 2
+access = 2
+current_dir = "/home/chris/Documents/Godot/Minecraft Record Factory"
+current_path = "/home/chris/Documents/Godot/Minecraft Record Factory/"
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -6,9 +6,9 @@ anchor_bottom = 1.0
 margin_left = 73.0
 margin_top = 104.0
 margin_right = -350.0
-margin_bottom = -301.0
+margin_bottom = -284.0
 window_title = "Confirm..."
-dialog_text = "Make sure to save before creating a new file or exiting."
+dialog_text = "Make sure to save before creating a new file, opening a file, or exiting."
 dialog_autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
