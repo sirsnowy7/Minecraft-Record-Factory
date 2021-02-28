@@ -15,7 +15,7 @@ export(bool) var iconDiscOverlay
 signal error(message)
 signal newPack(data)
 
-var recordList = { # replaces: [ disc name, artist, source, file path ]
+var recordList = { # replaces: [ song name, artist, source, file path ]
 	"13":      ["13", "C418", "", ""],
 	"cat":     ["cat", "C418", "", ""],
 	"blocks":  ["blocks", "C418", "", ""],
@@ -193,6 +193,13 @@ func _on_menuBar_save():
 	var file = File.new()
 	file.open("user://%s.json" % packName, File.READ)
 
+# this didnt work. added an escape to every space
+#func fixFileName(string):
+#	return string.replace(" ", "\\ ")
+
+func fixFileName(string):
+	return '""' + string + '""'
+
 # return 128 by 128 png of icon
 # why is this method so clean though :000
 func compileIcon():
@@ -218,6 +225,21 @@ func compileIcon():
 		img.blend_rect(overlay, Rect2(0,0,128,128), Vector2(0,0))
 	
 	return img
+
+# return a string with .mcmeta data
+#{
+#  "pack": {
+#	"pack_format": 6,
+#	"description": ""
+#  }
+#}
+func compilePackMeta():
+	var text = ""
+	text += "{\n\"pack\":{\n"
+	text += "\"pack_format\": 6,\n"
+	text += "\"description\": \"%s\"" % packDesc
+	text += "}\n}"
+	return text
 
 # return a string representing the readme
 func compileReadme():
@@ -247,6 +269,24 @@ func compileReadme():
 	
 	return text
 
+func compileRecFolder(records, dir, channels):
+	for r in records:
+		var path = records[r][3]
+		if ".mp3" in path: # source file, 1/2 (mono or stereo), output file
+			path = fixFileName(path)
+			var endPath = dir.get_current_dir() + "/" + r + ".ogg"
+			endPath = fixFileName(endPath)
+			OS.execute("ffmpeg", ["-y", "-vn", "-sn", "-i", path, "-ac", "%s" % channels, endPath], true)
+		elif ".ogg" in path:
+			if dir.copy(path, dir.get_current_dir() + "/" + r + ".ogg") == OK:
+				pass
+			else:
+				emit_signal("error", "Error! Copying file failed.")
+				return
+		else:
+			emit_signal("error", "Error! Record sound file selected not MP3 or Ogg.")
+
+# compiles the pack into a folder "packName" in selected dir
 func compile(d):
 	updateRecordList()
 	var dir = Directory.new()
@@ -254,11 +294,16 @@ func compile(d):
 		dir.make_dir(packName)
 		dir.change_dir(packName)
 		compileIcon().save_png(dir.get_current_dir() + "/pack.png")
-		var readme = File.new()
-		readme.open(dir.get_current_dir() + "/README.txt", File.WRITE)
-		readme.store_string(compileReadme())
+		var file = File.new()
+		file.open(dir.get_current_dir() + "/README.txt", File.WRITE)
+		file.store_string(compileReadme())
+		file.close()
+		file.open(dir.get_current_dir() + "/pack.mcmeta", File.WRITE)
+		file.store_string(compilePackMeta())
+		file.close()
 		dir.make_dir_recursive("assets/minecraft/sounds/records/")
 		dir.change_dir("assets/minecraft/sounds/records/")
+		compileRecFolder(recordList, dir, "1")
 	else:
 		emit_signal("error", "Error opening folder.")
 
