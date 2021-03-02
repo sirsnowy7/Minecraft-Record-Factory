@@ -10,6 +10,7 @@ onready var recordPack = get_tree().get_root().get_node("Main/RecordPack")
 onready var nameInp = $CenterContainer/MetadataContainer/TextDataMargin/TextData/NameInp
 onready var authorInp = $CenterContainer/MetadataContainer/TextDataMargin/TextData/AuthorInp
 onready var versionInp = $CenterContainer/MetadataContainer/TextDataMargin/TextData/VersionInp
+onready var monoCheck = $CenterContainer/MetadataContainer/TextDataMargin/TextData/MonoCheck
 onready var overlayTick = $CenterContainer/MetadataContainer/IconMargin/IconContainer/OverlayTick
 onready var fileButton = $CenterContainer/MetadataContainer/IconMargin/IconContainer/FileButton
 onready var descInp = $CenterContainer/MetadataContainer/DescMargin/DescContainer/DescEdit
@@ -38,7 +39,7 @@ func _on_File_button_down():
 	add_child(fileDialog)
 	# make it a modal and set up an event for file getting selected
 	fileDialog.show_modal(true)
-	fileDialog.filters = PoolStringArray(["*.png ; PNG Images"])
+	fileDialog.filters = PoolStringArray(["*.png ; PNG Images", "*.jpeg, *.jpg ; JPEG Images"])
 	fileDialog.connect("file_selected", self, "_on_OpenFile_file_selected")
 
 func changeIcon():
@@ -64,3 +65,10 @@ func _on_OpenFile_file_selected(fileSelected):
 func _on_OverlayTick_toggled(button_pressed):
 	discOverlay.visible = button_pressed
 	recordPack.iconDiscOverlay = button_pressed
+
+
+func _on_MonoCheck_toggled(button_pressed):
+	if button_pressed:
+		recordPack.packChannels = 1
+	else:
+		recordPack.packChannels = 2

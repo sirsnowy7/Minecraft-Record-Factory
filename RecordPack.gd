@@ -9,7 +9,8 @@ export(String) var packName
 export(String) var packAuthor
 export(String) var packVer # this is the pack version, not the minecraft version
 export(String) var packDesc
-export(String) var iconPath = "icon.png"
+export(String) var iconPath = "res://pack.png"
+export(int) var packChannels = 1
 export(bool) var iconDiscOverlay
 
 signal error(message)
@@ -85,6 +86,18 @@ func init(data):
 	if typeof(data) == TYPE_INT:
 		# fill up the record grid
 		fillRecords()
+		# reset window title
+		OS.set_window_title("New Project - Minecraft Record Factory")
+		# reset meta panel
+		metaPanel.recordPack = self
+		metaPanel.nameInp.text = ""
+		metaPanel.authorInp.text = ""
+		metaPanel.versionInp.text = ""
+		metaPanel.descInp.text = ""
+		metaPanel.fileButton.text = "Select file..."
+		metaPanel.overlayTick.pressed = true
+		metaPanel.monoCheck.pressed = true
+		metaPanel.changeIcon()
 	else:
 		# bring back the data!!!!
 		# i'm getting stupid lazy and janky with this lmao
@@ -95,6 +108,7 @@ func init(data):
 		packDesc = data["metadata"]["packDesc"]
 		iconPath = data["metadata"]["iconPath"]
 		iconDiscOverlay = data["metadata"]["iconDiscOverlay"]
+		packChannels = data["metadata"]["packChannels"]
 		fillRecords()
 		metaPanel.recordPack = self
 		metaPanel.nameInp.text = packName
@@ -104,7 +118,10 @@ func init(data):
 		metaPanel.fileButton.text = iconPath
 		metaPanel.fileButton.hint_tooltip = iconPath
 		metaPanel.overlayTick.pressed = iconDiscOverlay
+		metaPanel.monoCheck.pressed = true if packChannels == 1 else false
 		metaPanel.changeIcon()
+		# change window title to pack title
+		OS.set_window_title("%s - Minecraft Record Factory" % packName)
 
 # change recordList to fix records
 # i usually try to do object instead of function oriented
@@ -120,6 +137,20 @@ func updateRecordList():
 		recordList[arr[0]][2] = arr[3]
 		recordList[arr[0]][3] = arr[4]
 
+# literally the opposite
+func updateRecordObjs():
+	for i in recordList:
+		var arr = recordList[i]
+		var recordObj
+		for x in recordObjects:
+			if x.replaces == i:
+				recordObj = x
+		recordObj.songName = arr[0]
+		recordObj.artist = arr[1]
+		recordObj.source = arr[2]
+		recordObj.filePath = arr[3]
+		recordObj.update_text()
+
 # return pack as dict
 func to_dict():
 	var dict = {
@@ -130,7 +161,8 @@ func to_dict():
 			"packVer": packVer,
 			"packDesc": packDesc,
 			"iconPath": iconPath,
-			"iconDiscOverlay": iconDiscOverlay
+			"iconDiscOverlay": iconDiscOverlay,
+			"packChannels": packChannels
 		}
 	}
 	return dict
@@ -160,6 +192,7 @@ func saveFile(saveStr, fileName):
 		emit_signal("error", "Error saving! Maybe you have invalid characters in your pack name? (Pack Name: %s) Invalid characters include \"/\" on Linux. (Error code: %s)" % [packName, err])
 	file.store_string(saveStr)
 	file.close()
+	OS.set_window_title("%s - Minecraft Record Factory" % packName)
 
 func _on_loadFile():
 	# when file select button is clicked instance openfile dialog
@@ -284,7 +317,7 @@ func compileRecFolder(records, dir, channels):
 				emit_signal("error", "Error! Copying file failed.")
 				return
 		else:
-			emit_signal("error", "Error! Record sound file selected not MP3 or Ogg.")
+			emit_signal("error", "Error! Record sound file selected not MP3 or Ogg, or does not exist.")
 
 # compiles the pack into a folder "packName" in selected dir
 func compile(d):
@@ -303,7 +336,7 @@ func compile(d):
 		file.close()
 		dir.make_dir_recursive("assets/minecraft/sounds/records/")
 		dir.change_dir("assets/minecraft/sounds/records/")
-		compileRecFolder(recordList, dir, "1")
+		compileRecFolder(recordList, dir, packChannels)
 	else:
 		emit_signal("error", "Error opening folder.")
 
@@ -314,6 +347,11 @@ func _on_compile():
 	add_child(dirDialog)
 	dirDialog.show_modal(true)
 	dirDialog.connect("dir_selected", self, "compile")
+	# compilation popup
+	var dialog = load("res://CompilingDialog.tscn")
+	dialog = dialog.instance()
+	add_child(dialog)
+	dialog.visible = true
 
 # this came from reddit u/Xrayez
 func delete_children(node):

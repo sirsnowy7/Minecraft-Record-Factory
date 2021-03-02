@@ -34,6 +34,17 @@ func _ready():
 	artistInp.connect("text_changed", self, "_on_anyInp_change")
 	sourceInp.connect("text_changed", self, "_on_anyInp_change")
 
+func update_text():
+	songNameInp.text = songName
+	artistInp.text = artist
+	sourceInp.text = source
+	if filePath == "":
+		fileButton.text = "Select file..."
+		fileButton.hint_tooltip = "Select file..."
+	else:
+		fileButton.text = filePath
+		fileButton.hint_tooltip = filePath
+
 func to_dict():
 	# add all the info to a dictionary and then return it for saving
 	var dict = {

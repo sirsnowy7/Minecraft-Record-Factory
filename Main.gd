@@ -5,6 +5,7 @@ var main = true
 
 onready var swapperButton = $SwapperPanel/Swapper
 onready var mainPanel = $MainPanel
+onready var menuBar = $MenuPanel
 onready var aboutButton = $MenuPanel/MenuBar/About
 onready var metaPanel = $MetaPanel
 onready var aboutWindow = $AboutWindow
@@ -17,6 +18,7 @@ func _ready():
 	aboutButton.connect("pressed", aboutWindow, "_on_aboutButton_pressed")
 	recordPack.init(0)
 	recordPack.connect("newPack", self, "_on_newRecordPack")
+	menuBar.connect("new", self, "_on_newRecordPack")
 
 func _on_newRecordPack(data):
 	var newPack = RecordPack.new()

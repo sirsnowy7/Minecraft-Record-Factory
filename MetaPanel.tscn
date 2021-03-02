@@ -24,13 +24,13 @@ __meta__ = {
 }
 
 [node name="MetadataContainer" type="HBoxContainer" parent="CenterContainer"]
-margin_left = 113.0
+margin_left = 90.0
 margin_top = 119.0
-margin_right = 526.0
+margin_right = 550.0
 margin_bottom = 337.0
 
 [node name="TextDataMargin" type="MarginContainer" parent="CenterContainer/MetadataContainer"]
-margin_right = 101.0
+margin_right = 148.0
 margin_bottom = 218.0
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
@@ -40,11 +40,11 @@ custom_constants/margin_bottom = 10
 [node name="TextData" type="VBoxContainer" parent="CenterContainer/MetadataContainer/TextDataMargin"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 91.0
+margin_right = 138.0
 margin_bottom = 208.0
 
 [node name="NameLabel" type="Label" parent="CenterContainer/MetadataContainer/TextDataMargin/TextData"]
-margin_right = 81.0
+margin_right = 128.0
 margin_bottom = 14.0
 rect_pivot_offset = Vector2( -365.473, 61.653 )
 text = "Pack Name"
@@ -52,14 +52,15 @@ align = 1
 
 [node name="NameInp" type="LineEdit" parent="CenterContainer/MetadataContainer/TextDataMargin/TextData"]
 margin_top = 18.0
-margin_right = 81.0
+margin_right = 128.0
 margin_bottom = 42.0
 rect_pivot_offset = Vector2( -365.473, 43.653 )
+hint_tooltip = "Used in README as well as for folder and save names."
 expand_to_text_length = true
 
 [node name="AuthorLabel" type="Label" parent="CenterContainer/MetadataContainer/TextDataMargin/TextData"]
 margin_top = 46.0
-margin_right = 81.0
+margin_right = 128.0
 margin_bottom = 60.0
 rect_pivot_offset = Vector2( -365.473, 61.653 )
 text = "Pack Author"
@@ -67,14 +68,15 @@ align = 1
 
 [node name="AuthorInp" type="LineEdit" parent="CenterContainer/MetadataContainer/TextDataMargin/TextData"]
 margin_top = 64.0
-margin_right = 81.0
+margin_right = 128.0
 margin_bottom = 88.0
 rect_pivot_offset = Vector2( -365.473, 43.653 )
+hint_tooltip = "Only used in README.txt."
 expand_to_text_length = true
 
 [node name="VersionLabel" type="Label" parent="CenterContainer/MetadataContainer/TextDataMargin/TextData"]
 margin_top = 92.0
-margin_right = 81.0
+margin_right = 128.0
 margin_bottom = 106.0
 rect_pivot_offset = Vector2( -365.473, 61.653 )
 text = "Pack Version"
@@ -82,14 +84,26 @@ align = 1
 
 [node name="VersionInp" type="LineEdit" parent="CenterContainer/MetadataContainer/TextDataMargin/TextData"]
 margin_top = 110.0
-margin_right = 81.0
+margin_right = 128.0
 margin_bottom = 134.0
 rect_pivot_offset = Vector2( -365.473, 43.653 )
+hint_tooltip = "Only used in README.txt."
 expand_to_text_length = true
 
+[node name="MonoCheck" type="CheckBox" parent="CenterContainer/MetadataContainer/TextDataMargin/TextData"]
+margin_top = 138.0
+margin_right = 128.0
+margin_bottom = 162.0
+hint_tooltip = "Enables fade out effect."
+pressed = true
+text = "Monaural Audio"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="IconMargin" type="MarginContainer" parent="CenterContainer/MetadataContainer"]
-margin_left = 105.0
-margin_right = 258.0
+margin_left = 152.0
+margin_right = 305.0
 margin_bottom = 218.0
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
@@ -126,6 +140,7 @@ align = 1
 margin_top = 150.0
 margin_right = 133.0
 margin_bottom = 170.0
+hint_tooltip = "Select a PNG or JPEG file for the pack cover."
 text = "Select file..."
 clip_text = true
 
@@ -133,13 +148,14 @@ clip_text = true
 margin_top = 174.0
 margin_right = 133.0
 margin_bottom = 198.0
+hint_tooltip = "Whether or not to add overlay of Stal."
 pressed = true
 text = "Add disc overlay"
 align = 1
 
 [node name="DescMargin" type="MarginContainer" parent="CenterContainer/MetadataContainer"]
-margin_left = 262.0
-margin_right = 413.0
+margin_left = 309.0
+margin_right = 460.0
 margin_bottom = 218.0
 
 [node name="DescContainer" type="VBoxContainer" parent="CenterContainer/MetadataContainer/DescMargin"]
@@ -155,6 +171,7 @@ text = "Pack Description           "
 margin_top = 18.0
 margin_right = 151.0
 margin_bottom = 218.0
+hint_tooltip = "Used as the pack description in MCMeta file."
 size_flags_vertical = 3
 wrap_enabled = true
 __meta__ = {
@@ -164,5 +181,6 @@ __meta__ = {
 [node name="ErrorHandler" parent="." instance=ExtResource( 5 )]
 script = ExtResource( 4 )
 [connection signal="error" from="." to="ErrorHandler" method="_on_MetaPanel_error"]
+[connection signal="toggled" from="CenterContainer/MetadataContainer/TextDataMargin/TextData/MonoCheck" to="." method="_on_MonoCheck_toggled"]
 [connection signal="button_down" from="CenterContainer/MetadataContainer/IconMargin/IconContainer/FileButton" to="." method="_on_File_button_down"]
 [connection signal="toggled" from="CenterContainer/MetadataContainer/IconMargin/IconContainer/OverlayTick" to="." method="_on_OverlayTick_toggled"]

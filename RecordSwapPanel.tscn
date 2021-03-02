@@ -1,0 +1,58 @@
+[gd_scene format=2]
+
+[node name="RecordSwapPanel" type="WindowDialog"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -112.8
+margin_top = -132.787
+margin_right = 120.8
+margin_bottom = -55.7868
+window_title = "Select 2 records to swap"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_top = 0.28
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = -17.56
+margin_right = -4.0
+margin_bottom = -4.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 64.0
+margin_top = 12.0
+margin_right = 161.0
+margin_bottom = 56.0
+
+[node name="RecordLists" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+margin_right = 97.0
+margin_bottom = 20.0
+
+[node name="Record1" type="OptionButton" parent="CenterContainer/VBoxContainer/RecordLists"]
+margin_right = 45.0
+margin_bottom = 20.0
+text = "13"
+items = [ "13", null, false, 0, null, "cat", null, false, 1, null, "blocks", null, false, 2, null, "chirp", null, false, 3, null, "far", null, false, 4, null, "mall", null, false, 5, null, "mellohi", null, false, 6, null, "stal", null, false, 7, null, "strad", null, false, 8, null, "ward", null, false, 9, null, "11", null, false, 10, null, "wait", null, false, 11, null, "Pigstep", null, false, 12, null ]
+selected = 0
+
+[node name="Record2" type="OptionButton" parent="CenterContainer/VBoxContainer/RecordLists"]
+margin_left = 49.0
+margin_right = 97.0
+margin_bottom = 20.0
+text = "cat"
+items = [ "13", null, false, 0, null, "cat", null, false, 1, null, "blocks", null, false, 2, null, "chirp", null, false, 3, null, "far", null, false, 4, null, "mall", null, false, 5, null, "mellohi", null, false, 6, null, "stal", null, false, 7, null, "strad", null, false, 8, null, "ward", null, false, 9, null, "11", null, false, 10, null, "wait", null, false, 11, null, "Pigstep", null, false, 12, null ]
+selected = 1
+
+[node name="GoButton" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_top = 24.0
+margin_right = 97.0
+margin_bottom = 44.0
+text = "Go"
