@@ -5,6 +5,8 @@ var fileMenuPopup
 var editMenuPopup
 var recordSwapPanel
 var recordPack
+var artistDialog
+var sourceDialog
 
 signal new(data)
 signal save
@@ -51,9 +53,9 @@ func _on_editMenu_id_pressed(id):
 	if id == 0:
 		swap_records()
 	elif id == 1:
-		pass
+		change_all_artists()
 	elif id == 2:
-		pass
+		change_all_sources()
 
 func swap_records():
 	recordSwapPanel = load("res://RecordSwapPanel.tscn")
@@ -75,3 +77,42 @@ func _on_swap_goPressed():
 	recordPack.recordList[record2] = data1
 	recordPack.updateRecordObjs()
 	recordSwapPanel.queue_free()
+
+func change_all_artists():
+	artistDialog = load("res://ArtistsDialog.tscn")
+	artistDialog = artistDialog.instance()
+	add_child(artistDialog)
+	artistDialog.show_modal(true)
+	var goButton = artistDialog.get_node("CenterContainer/VBoxContainer/GoButton")
+	goButton.connect("pressed", self, "_on_artists_goPressed")
+
+func _on_artists_goPressed():
+	var input = artistDialog.get_node("CenterContainer/VBoxContainer/LineEdit")
+	input = input.text
+	var recordPack = main.recordPack
+	recordPack.updateRecordList()
+	var recordList = recordPack.recordList
+	for r in recordList:
+		recordList[r][1] = input
+	recordPack.updateRecordObjs()
+	artistDialog.queue_free()
+
+# its so funny to blatantly copy and reuse code
+func change_all_sources():
+	sourceDialog = load("res://SourceDialog.tscn")
+	sourceDialog = sourceDialog.instance()
+	add_child(sourceDialog)
+	sourceDialog.show_modal(true)
+	var goButton = sourceDialog.get_node("CenterContainer/VBoxContainer/GoButton")
+	goButton.connect("pressed", self, "_on_sources_goPressed")
+
+func _on_sources_goPressed():
+	var input = sourceDialog.get_node("CenterContainer/VBoxContainer/LineEdit")
+	input = input.text
+	var recordPack = main.recordPack
+	recordPack.updateRecordList()
+	var recordList = recordPack.recordList
+	for r in recordList:
+		recordList[r][2] = input
+	recordPack.updateRecordObjs()
+	sourceDialog.queue_free()

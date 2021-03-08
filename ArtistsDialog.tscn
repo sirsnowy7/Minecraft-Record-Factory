@@ -1,0 +1,46 @@
+[gd_scene format=2]
+
+[node name="ArtistsDialog" type="WindowDialog"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -129.0
+margin_top = -119.0
+margin_right = 129.0
+margin_bottom = -24.0
+window_title = "Change all artists"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 74.0
+margin_top = 14.0
+margin_right = 183.0
+margin_bottom = 80.0
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_right = 109.0
+margin_bottom = 14.0
+text = "New Artist Name"
+align = 1
+
+[node name="LineEdit" type="LineEdit" parent="CenterContainer/VBoxContainer"]
+margin_top = 18.0
+margin_right = 109.0
+margin_bottom = 42.0
+expand_to_text_length = true
+
+[node name="GoButton" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_top = 46.0
+margin_right = 109.0
+margin_bottom = 66.0
+text = "Go"

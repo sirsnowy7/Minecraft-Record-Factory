@@ -4,6 +4,7 @@ class_name RecordPack
 
 var fileDialog
 var dirDialog
+var callFunc
 
 export(String) var packName
 export(String) var packAuthor
@@ -29,7 +30,7 @@ var recordList = { # replaces: [ song name, artist, source, file path ]
 	"ward":    ["ward", "C418", "", ""],
 	"11":      ["11", "C418", "", ""],
 	"wait":    ["wait", "C418", "", ""],
-	"Pigstep": ["Pigstep", "Lena Raine", "", ""]
+	"pigstep": ["pigstep", "Lena Raine", "", ""]
 }
 
 var recordObjects = []
@@ -311,11 +312,16 @@ func compileRecFolder(records, dir, channels):
 			endPath = fixFileName(endPath)
 			OS.execute("ffmpeg", ["-y", "-vn", "-sn", "-i", path, "-ac", "%s" % channels, endPath], true)
 		elif ".ogg" in path:
-			if dir.copy(path, dir.get_current_dir() + "/" + r + ".ogg") == OK:
-				pass
-			else:
-				emit_signal("error", "Error! Copying file failed.")
-				return
+			path = fixFileName(path)
+			var endPath = dir.get_current_dir() + "/" + r + ".ogg"
+			endPath = fixFileName(endPath)
+			OS.execute("ffmpeg", ["-y", "-vn", "-sn", "-i", path, "-ac", "%s" % channels, endPath], true)
+#		elif ".ogg" in path:
+#			if dir.copy(path, dir.get_current_dir() + "/" + r + ".ogg") == OK:
+#				pass
+#			else:
+#				emit_signal("error", "Error! Copying file failed.")
+#				return
 		else:
 			emit_signal("error", "Error! Record sound file selected not MP3 or Ogg, or does not exist.")
 

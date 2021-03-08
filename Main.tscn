@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://MenuBar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://RecordPack.gd" type="Script" id=2]
 [ext_resource path="res://Main.gd" type="Script" id=4]
 [ext_resource path="res://MetaPanel.tscn" type="PackedScene" id=5]
 [ext_resource path="res://AboutWindow.tscn" type="PackedScene" id=6]
-[ext_resource path="res://SaveDialog.tscn" type="PackedScene" id=7]
 [ext_resource path="res://ErrorHandler.tscn" type="PackedScene" id=8]
 [ext_resource path="res://ErrorHandler.gd" type="Script" id=9]
 
@@ -64,12 +63,6 @@ __meta__ = {
 [node name="MetaPanel" parent="." instance=ExtResource( 5 )]
 
 [node name="AboutWindow" parent="." instance=ExtResource( 6 )]
-
-[node name="SaveDialog" parent="." instance=ExtResource( 7 )]
-margin_left = 107.0
-margin_top = 152.0
-margin_right = -316.0
-margin_bottom = -249.0
 
 [node name="ErrorHandler" parent="." instance=ExtResource( 8 )]
 script = ExtResource( 9 )

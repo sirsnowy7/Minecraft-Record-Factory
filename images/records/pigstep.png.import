@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Pigstep.png-8911e61cfde968a0905461ad6ba9c93e.stex"
+path="res://.import/pigstep.png-e3aa00079db29f9b0128215519d4bd1a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/records/Pigstep.png"
-dest_files=[ "res://.import/Pigstep.png-8911e61cfde968a0905461ad6ba9c93e.stex" ]
+source_file="res://images/records/pigstep.png"
+dest_files=[ "res://.import/pigstep.png-e3aa00079db29f9b0128215519d4bd1a.stex" ]
 
 [params]
 
