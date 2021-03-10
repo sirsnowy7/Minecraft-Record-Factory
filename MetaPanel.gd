@@ -45,8 +45,9 @@ func _on_File_button_down():
 func changeIcon():
 	var tex = ImageTexture.new()
 	var img = Image.new()
-	img.load(recordPack.iconPath)
-	img.resize(128, 128)
+	tex.load(recordPack.iconPath)
+	img = tex.get_data()
+	img.resize(128,128) # i didn't test this but it probably works
 	tex.create_from_image(img)
 	if not tex.get_height() == tex.get_width():
 		emit_signal("error", "Error! Image aspect ratio not 1:1.")
