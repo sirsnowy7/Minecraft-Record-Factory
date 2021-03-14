@@ -10,7 +10,7 @@ export(String) var packName
 export(String) var packAuthor
 export(String) var packVer # this is the pack version, not the minecraft version
 export(String) var packDesc
-export(String) var iconPath = "res://icon.png"
+export(String) var iconPath = "icon.png"
 export(int) var packChannels = 1
 export(bool) var iconDiscOverlay
 
